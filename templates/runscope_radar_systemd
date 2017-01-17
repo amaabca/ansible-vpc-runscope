@@ -1,0 +1,11 @@
+[Unit]
+Description=systemd config for runscope radar agent
+
+[Service]
+Type=simple
+SyslogIdentifier=runscope_radar
+ExecStart={{ root_path }}runscope-radar -f {{ root_path }}radar.conf
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

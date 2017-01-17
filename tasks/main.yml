@@ -1,2 +1,45 @@
 ---
 # tasks file for ansible-vpc-runscope
+- name: Install unzip
+  apt:
+    name: unzip
+    state: present
+    update_cache: yes
+
+- name: Download runscope agent
+  get_url:
+    url: "{{ agent_url }}"
+    dest: "{{ root_path }}runscope-radar.zip"
+
+- name: Unzip agent
+  unarchive:
+    creates: runscope-radar
+    remote_src: True
+    src: "{{ root_path }}runscope-radar.zip"
+    dest: "{{ root_path }}"
+
+- name: Remove zip file
+  file:
+    path: ~/runscope-radar.zip
+    state: absent
+
+- name: Upload configuration
+  template:
+    src: radar.conf
+    dest: "{{ root_path }}radar.conf"
+
+- name: Copy systemd template to systemd multiuser directory
+  become: yes
+  template: src=runscope_radar_systemd dest=/lib/systemd/system/runscope_radar.service owner=root group=root
+
+- name: reload the systemd process after modifying config file
+  become: yes
+  command: systemctl daemon-reload
+
+- name: configure runscope radar agent to restart on reboot
+  become: yes
+  command: systemctl enable runscope_radar
+
+- name: explicitly start runscope radar agent
+  become: yes
+  command: systemctl start runscope_radar
