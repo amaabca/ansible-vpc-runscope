@@ -6,4 +6,5 @@ runscope_threads: 10
 runscope_timeout: 20
 runscope_disconnect_timeout: 5
 runscope_cafile: ""
-root_path: /home/ubuntu/
+runscope_agent_path: /home/ubuntu/
+agent_conf_file_path: /home/ubuntu/

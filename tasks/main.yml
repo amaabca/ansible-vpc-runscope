@@ -9,24 +9,24 @@
 - name: Download runscope agent
   get_url:
     url: "{{ agent_url }}"
-    dest: "{{ root_path }}runscope-radar.zip"
+    dest: "{{ runscope_agent_path }}runscope-radar.zip"
 
 - name: Unzip agent
   unarchive:
     creates: runscope-radar
     remote_src: True
-    src: "{{ root_path }}runscope-radar.zip"
-    dest: "{{ root_path }}"
+    src: "{{ runscope_agent_path }}runscope-radar.zip"
+    dest: "{{ runscope_agent_path }}"
 
 - name: Remove zip file
   file:
-    path: ~/runscope-radar.zip
+    path: "{{ runscope_agent_path }}runscope-radar.zip"
     state: absent
 
 - name: Upload configuration
   template:
     src: radar.conf
-    dest: "{{ root_path }}radar.conf"
+    dest: "{{ agent_conf_file_path }}radar.conf"
 
 - name: Copy systemd template to systemd multiuser directory
   become: yes

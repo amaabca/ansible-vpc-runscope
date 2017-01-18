@@ -17,7 +17,8 @@ Role Variables
 * runscope_timeout: runscope timeout
 * runscope_disconnect_timeout: runscope disconnect timeout
 * runscope_cafile: runscope cafile
-* root_path: path where the agent will reside.
+* runscope_agent_path: path where the agent will reside.
+* agent_conf_file_path: path where the agent configuration file will reside.
 
 Dependencies
 ------------
