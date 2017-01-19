@@ -1,2 +1,10 @@
 ---
 # defaults file for ansible-vpc-runscope
+agent_url: https://s3.amazonaws.com/runscope-downloads/runscope-radar/latest/linux-amd64/runscope-radar.zip
+runscope_api_host: https://api.runscope.com
+runscope_threads: 10
+runscope_timeout: 20
+runscope_disconnect_timeout: 5
+runscope_cafile: ""
+runscope_agent_path: /home/ubuntu/
+agent_conf_file_path: /home/ubuntu/
